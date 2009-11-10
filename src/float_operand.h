@@ -16,7 +16,7 @@ namespace arch {
 
   /**
    * \class float_operand
-   * \brief stores float value
+   * \brief stores float value, 
    *        implements float_operand_iface
    */
   struct float_operand : float_operand_iface

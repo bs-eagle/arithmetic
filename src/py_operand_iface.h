@@ -1,7 +1,7 @@
 /**
  *       \file  py_operand_iface.h
  *      \brief  python wrapper for operand_iface
- *     \detail  python wrapper should be used to implement
+ *     \details python wrapper should be used to implement
  *              operand_iface in python
  *     \author  Sergey Miryanov (sergey-miryanov), sergey.miryanov@gmail.com
  *       \date  30.10.2009
@@ -30,9 +30,9 @@ namespace python {
    * \class py_operand_iface
    * \brief python wrapper for operand_iface
    *        implements operand_iface
-   * \detail if operand_iface implemented in python try 
-   *         to call interface function otherwise throws
-   *         exception
+   * \details if operand_iface implemented in python try 
+   *          to call interface function otherwise throws
+   *          exception
    * */
   struct py_operand_iface : py_operand_iface_base, boost::python::wrapper <py_operand_iface_base>
   {

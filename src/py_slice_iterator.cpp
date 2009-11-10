@@ -32,9 +32,9 @@ namespace python {
 
   /**
    * \brief  generalized version of iterate_slice
-   * \detail iterates through data in slice range, 
-   *         evaluates expression top and stores result 
-   *         of it in dest array
+   * \details iterates through data in slice range, 
+   *          evaluates expression top and stores result 
+   *          of it in dest array
    * \param  s slice that stores info of data range
    * \param  dest destination array, result of 
    *              expression will be stored in this array

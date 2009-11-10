@@ -26,11 +26,11 @@ namespace python {
   };
   /**
    * \class py_arithmetic_iface
-   * \brief python wrapper for arithmetic_iface
+   * \brief python wrapper for arithmetic_iface, 
    *        implements arithmetic_iface
-   * \detail if arithmetic_iface implemented if python try
-   *         to call interface function otherwise throws
-   *         exception
+   * \details if arithmetic_iface implemented if python try
+   *          to call interface function otherwise throws
+   *          exception
    * */
   struct py_arithmetic_iface : py_arithmetic_iface_base, boost::python::wrapper <py_arithmetic_iface_base>
   {

@@ -33,7 +33,7 @@ namespace arch {
     /**
      * \brief  returns array[idx] value
      * \param  idx value index
-     * \return value
+     * \return array[idx] value
      */
     float16_t
     get (size_t idx)

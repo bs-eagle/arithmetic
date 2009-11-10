@@ -42,7 +42,7 @@ namespace arch {
 
   /**
    * \class max_operator
-   * \brief incapsulates maximum (lhs, rhs) operation
+   * \brief incapsulates maximum (lhs, rhs) operation, 
    *        implements binary_operator_iface
    */
   struct max_operator : binary_operator
@@ -71,7 +71,7 @@ namespace arch {
 
   /**
    * \class min_operator
-   * \brief incapsulates minimum (lhs, rhs) operation
+   * \brief incapsulates minimum (lhs, rhs) operation, 
    *        implements binary_operator_iface
    */
   struct min_operator : binary_operator
@@ -100,7 +100,7 @@ namespace arch {
 
   /**
    * \class sum_operator
-   * \brief incapsulates summation (lhs, rhs) operation
+   * \brief incapsulates summation (lhs, rhs) operation, 
    *        implements binary_operator_iface
    */
   struct sum_operator : binary_operator
@@ -128,7 +128,7 @@ namespace arch {
   };
   /**
    * \class sub_operator
-   * \brief incapsulates subtract (lhs, rhs) operation
+   * \brief incapsulates subtract (lhs, rhs) operation, 
    *        implements binary_operator_iface
    */
   struct sub_operator : binary_operator
@@ -156,7 +156,7 @@ namespace arch {
   };
   /**
    * \class mul_operator
-   * \brief incapsulates multiplication (lhs, rhs) operation
+   * \brief incapsulates multiplication (lhs, rhs) operation, 
    *        implements binary_operator_iface
    */
   struct mul_operator : binary_operator
@@ -184,7 +184,7 @@ namespace arch {
   };
   /**
    * \class div_operator
-   * \brief incapsulates division (lhs, rhs) operation
+   * \brief incapsulates division (lhs, rhs) operation, 
    *        implements binary_operator_iface
    */
   struct div_operator : binary_operator
