@@ -1,0 +1,57 @@
+#
+#       \file  SConscript.bs
+#      \brief  SConscript for build plugins by blue-sky build system
+#     \author  Sergey Miryanov (sergey-miryanov), sergey.miryanov@gmail.com
+#       \date  23.10.2009
+#  \copyright  This source code is released under the terms of 
+#              the BSD License. See LICENSE for more details.
+#
+
+import os
+Import ("*")
+
+lib_name = "bs_arch"
+tar_name = "bs_arch"
+
+env = custom_env.Clone ()
+env.Append (CPPPATH = ["include",
+    includes["bs_bos_core_base"],
+    includes["bs_matrix"],
+    includes["bs_base_linear_solvers"],
+    includes["bs_csr_ilu_prec"],
+    includes["bs_bos_core_data_storage"],
+    includes["bs_mesh_mpfa"],
+    includes["bs_scal"],
+    includes["bs_pvt"]
+    ] + includes["kernel"]
+    + includes["bs_mesh"]
+    )
+
+libs = ["blue_sky", 
+     "bs_bos_core_base", 
+     "bs_matrix", 
+     "bs_base_linear_solvers", 
+     "bs_csr_ilu_prec",
+     "bs_bos_core_data_storage",
+     "bs_scal",
+     "bs_pvt"
+     ]
+
+boost_libs = ["boost_date_time-mt"]
+
+if (build_kind == "debug") :
+    env.AppendUnique (LIBS = list_suffix (libs, "_d") + list_suffix (boost_libs, "-d"))
+    lib_name += "_d"
+elif (build_kind == "release") :
+    env.AppendUnique (LIBS = libs + boost_libs)
+
+bs_arch = env.SharedLibrary (target = os.path.join (tar_exe_plugin_dir, lib_name), source = files (["."]).sources)
+
+env.Alias (tar_name, bs_arch)
+Export ("bs_arch")
+
+if (env["install"] == 1) :
+    inst_tar = env.Install ("$plugins_prefix", bs_arch)
+    env.Alias (tar_name, inst_tar)
+
+
