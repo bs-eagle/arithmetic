@@ -49,13 +49,13 @@ namespace python {
     index_t sy = s.y.end - s.y.begin;
     index_t sz = s.z.end - s.z.begin;
 
-    if (sx < 0 || sx >= dimens.nx || s.x.end >= dimens.nx)
+    if (sx < 0 || sx >= dimens.nx || s.x.end > dimens.nx)
       bs_throw_exception (boost::format ("Invalid slice.x (%ld, %ld), dimens.nx = %ld") % s.x.begin % s.x.end % dimens.nx);
 
-    if (sy < 0 || sy >= dimens.ny || s.y.end >= dimens.ny)
+    if (sy < 0 || sy >= dimens.ny || s.y.end > dimens.ny)
       bs_throw_exception (boost::format ("Invalid slice.y (%ld, %ld), dimens.ny = %ld") % s.y.begin % s.y.end % dimens.ny);
 
-    if (sz < 0 || sz >= dimens.nz || s.z.end >= dimens.nz)
+    if (sz < 0 || sz >= dimens.nz || s.z.end > dimens.nz)
       bs_throw_exception (boost::format ("Invalid slice.z (%ld, %ld), dimens.nz = %ld") % s.z.begin % s.z.end % dimens.nz);
 
     if (sx * sy * sz >= static_cast <index_t> (dest.size ()))
