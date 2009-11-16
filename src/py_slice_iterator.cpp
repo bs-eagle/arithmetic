@@ -16,9 +16,6 @@
 
 #include "py_slice_iterator.h"
 
-#include "rs_mesh_iface.h"
-#include "rs_smesh_iface.h"
-
 #include "strategies.h"
 #include "aligned_allocator.h"
 #include "export_python_wrapper.h"
@@ -31,26 +28,41 @@ namespace arch {
 namespace python {
 
   /**
-   * \brief  generalized version of iterate_slice
-   * \details iterates through data in slice range, 
+   * \brief   Generalized version of iterate_slice
+   * \details Iterates through data in slice range, 
    *          evaluates expression top and stores result 
    *          of it in dest array
-   * \param  s slice that stores info of data range
-   * \param  dest destination array, result of 
+   * \param  s Slice that stores info of data range
+   * \param  dimens Holds data dimensions
+   * \param  dest Destination array, result of 
    *              expression will be stored in this array
-   * \param  top top of the expression tree, expression 
-   *             will be evaluated from top to bottom of 
-   *             tree
-   * \param  __formal used to deduce template type for index_t
-   * \return 
+   * \param  top Top of the expression tree, expression 
+   *             will be evaluated from top to bottom 
    * */
-  template <typename array_t, typename index_t>
+  template <typename array_t>
   void
-  iterate_slice_t (const slice &s, array_t &dest, const shared_operand_t &top, index_t)
+  iterate_slice_t (const slice &s, const data_dimens &dimens, array_t &dest, const shared_operand_t &top)
   {
-    BS_ASSERT (dest.size () >= s.x.end * s.y.end * s.z.end) (s.x.end) (s.y.end) (s.z.end);
+    typedef long long index_t;
 
-    index_t idx = 0;
+    index_t sx = s.x.end - s.x.begin;
+    index_t sy = s.y.end - s.y.begin;
+    index_t sz = s.z.end - s.z.begin;
+
+    if (sx < 0 || sx >= dimens.nx || s.x.end >= dimens.nx)
+      bs_throw_exception (boost::format ("Invalid slice.x (%ld, %ld), dimens.nx = %ld") % s.x.begin % s.x.end % dimens.nx);
+
+    if (sy < 0 || sy >= dimens.ny || s.y.end >= dimens.ny)
+      bs_throw_exception (boost::format ("Invalid slice.y (%ld, %ld), dimens.ny = %ld") % s.y.begin % s.y.end % dimens.ny);
+
+    if (sz < 0 || sz >= dimens.nz || s.z.end >= dimens.nz)
+      bs_throw_exception (boost::format ("Invalid slice.z (%ld, %ld), dimens.nz = %ld") % s.z.begin % s.z.end % dimens.nz);
+
+    if (sx * sy * sz >= static_cast <index_t> (dest.size ()))
+      bs_throw_exception (boost::format ("Invalid dest size (%ld), slice (%ld:%ld, %ld:%ld, %ld:%ld)") % dest.size () % s.x.begin 
+        % s.x.end % s.y.begin % s.y.end % s.z.begin % s.z.end);
+
+    index_t idx = s.x.begin * dimens.nx * dimens.ny + s.y.begin * dimens.ny + s.z.begin;
     for (index_t i = s.x.begin; i < s.x.end + 1; ++i)
       {
         for (index_t j = s.y.begin; j < s.y.end + 1; ++j)
@@ -63,22 +75,18 @@ namespace python {
       }
   }
 
-  template <typename strategy_t>
   void
-  py_slice_iterator <strategy_t>::iterate_slice_float (const slice &s,
+  py_slice_iterator::iterate_slice_float (const slice &s, const data_dimens &dimens,
     array_float16_t &dest, const shared_operand_t &top)
   {
-    typedef typename strategy_t::index_t index_t;
-    iterate_slice_t (s, dest, top, index_t ());
+    iterate_slice_t (s, dimens, dest, top);
   }
 
-  template <typename strategy_t>
   void
-  py_slice_iterator <strategy_t>::iterate_slice_int (const slice &s,
+  py_slice_iterator::iterate_slice_int (const slice &s, const data_dimens &dimens,
     array_uint8_t &dest, const shared_operand_t &top)
   {
-    typedef typename strategy_t::index_t index_t;
-    iterate_slice_t (s, dest, top, index_t ());
+    iterate_slice_t (s, dimens, dest, top);
   }
 
   /**
@@ -104,7 +112,7 @@ namespace python {
       .add_property ("z", &slice::z)
       ;
 
-    strategy_exporter::export_base_ext <py_slice_iterator, py_slice_iterator_exporter, class_type::concrete_class> ("slice_iterator");
+    base_exporter <py_slice_iterator, py_slice_iterator_exporter, class_type::concrete_class>::export_class ("slice_iterator");
   }
 
 } // namespace python
