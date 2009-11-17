@@ -62,14 +62,15 @@ namespace python {
       bs_throw_exception (boost::format ("Invalid dest size (%ld), slice (%ld:%ld, %ld:%ld, %ld:%ld)") % dest.size () % s.x.begin 
         % s.x.end % s.y.begin % s.y.end % s.z.begin % s.z.end);
 
-    index_t idx = s.x.begin * dimens.nx * dimens.ny + s.y.begin * dimens.ny + s.z.begin;
+    index_t global_idx = s.x.begin * dimens.nx * dimens.ny + s.y.begin * dimens.ny + s.z.begin;
+    index_t local_idx = 0;
     for (index_t i = s.x.begin; i < s.x.end + 1; ++i)
       {
         for (index_t j = s.y.begin; j < s.y.end + 1; ++j)
           {
-            for (index_t k = s.z.begin; k < s.z.end + 1; ++k, ++idx)
+            for (index_t k = s.z.begin; k < s.z.end + 1; ++k, ++global_idx, ++local_idx)
               {
-                dest [idx] = top->get (idx);
+                dest [global_idx] = top->get (global_idx, local_idx);
               }
           }
       }

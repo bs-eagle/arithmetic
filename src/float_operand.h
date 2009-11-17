@@ -44,11 +44,12 @@ namespace arch {
 
     /**
      * \brief  returns stored value
-     * \param  not used
+     * \param  __formal
+     * \param  __formal
      * \return stored value
      */
     float16_t
-    get (size_t)
+    get (long long, long long)
     {
       return value_;
     }

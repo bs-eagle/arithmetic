@@ -23,7 +23,6 @@ namespace arch {
     /**
      * \brief  array_operand constructor
      * \param  array handled array
-     * \return 
      */
     array_operand (const array_float16_t &array)
     : array (array)
@@ -33,10 +32,11 @@ namespace arch {
     /**
      * \brief  returns array[idx] value
      * \param  idx value index
+     * \param  __formal
      * \return array[idx] value
      */
     float16_t
-    get (size_t idx)
+    get (long long idx, long long)
     {
       return array[idx];
     }

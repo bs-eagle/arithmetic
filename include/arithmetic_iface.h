@@ -25,11 +25,12 @@ namespace arch {
 
     /**
      * \brief  returns value with index
-     * \param  idx is an index of value
+     * \param  global_idx is an index of value in slice
+     * \param  local_idx is an index of value in order(?)
      * \return 
      */
     virtual float16_t
-    get (size_t idx) = 0;
+    get (long long global_idx, long long local_idx) = 0;
   };
 
   /**

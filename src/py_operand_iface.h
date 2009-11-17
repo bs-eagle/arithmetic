@@ -41,7 +41,7 @@ namespace python {
      * \param  idx is an index of value
      * \return may throw exception
      */
-    WRAP_PURE_METHOD (get, float16_t, 1, (size_t));
+    WRAP_PURE_METHOD_R (get, float16_t, 2, (long long, long long)); 
   };
 
   /**

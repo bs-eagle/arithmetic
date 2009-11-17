@@ -19,6 +19,8 @@
 #include "unary_operators.h"
 #include "float_operand.h"
 #include "array_operand.h"
+#include "vector_operand.h"
+#include "logic_operators.h"
 
 #include "py_slice_iterator.h"
 #include "py_arithmetic_iface.h"
@@ -88,7 +90,19 @@ BLUE_SKY_INIT_PY_FUN
     .def ("get", &array_operand::get)
     ;
 
+  class_ <vector_operand, bases <operand_iface> > ("vector_op", init <const array_float16_t &> ())
+    .def ("get", &array_operand::get)
+    ;
+
   export_unary <unary_minus_operator> ("unary_minus_op");
+  export_unary <sin_op>   ("sin_op");
+  export_unary <cos_op>   ("cos_op");
+  export_unary <tan_op>   ("tan_op");
+  export_unary <sqrt_op>  ("sqrt_op");
+  export_unary <abs_op>   ("abs_op");
+  export_unary <abs_op>   ("abs_op");
+  export_unary <log_op>   ("log_op");
+  export_unary <log10_op> ("log10_op");
 
   export_binary <max_operator> ("max_op");
   export_binary <min_operator> ("min_op");
@@ -97,8 +111,14 @@ BLUE_SKY_INIT_PY_FUN
   export_binary <mul_operator> ("mul_op");
   export_binary <div_operator> ("div_op");
 
-  export_slice_iterator ();
+  export_binary <greater_op>      ("greater_op");
+  export_binary <greater_equ_op>  ("greater_equ_op");
+  export_binary <less_op>         ("less_op");
+  export_binary <less_equ_op>     ("less_equ_op");
+  export_binary <equ_op>          ("equ_op");
+  export_binary <not_equ_op>      ("not_equ_op");
 
+  export_slice_iterator ();
   export_arithmetic_iface ();
 }
 #endif // #ifdef BSPY_EXPORTING_PLUGIN

@@ -23,6 +23,11 @@ namespace python {
    * */
   struct py_arithmetic_iface_base : arithmetic_iface
   {
+    void
+    process_line (const std::string &)
+    {
+      bs_throw_exception ("PURE CALL");
+    }
   };
   /**
    * \class py_arithmetic_iface

@@ -59,13 +59,14 @@ namespace arch {
     }
     /**
      * \brief  implements maximum (lhs[idx], rhs[idx]) operation
-     * \param  idx value index
+     * \param  idx value index in slice
+     * \param  local_idx value index
      * \return maximum of two values lhs[idx] and rhs[idx]
      */
     float16_t
-    get (size_t idx) 
+    get (long long idx, long long local_idx) 
     {
-      return (std::max) (lhs->get (idx), rhs->get (idx));
+      return (std::max) (lhs->get (idx, local_idx), rhs->get (idx, local_idx));
     }
   };
 
@@ -88,13 +89,14 @@ namespace arch {
     }
     /**
      * \brief  implements minimum (lhs[idx], rhs[idx]) operation
-     * \param  idx value index
+     * \param  idx value index in slice
+     * \param  local_idx value index
      * \return minimum of two values lhs[idx] and rhs[idx]
      */
     float16_t
-    get (size_t idx)
+    get (long long idx, long long local_idx)
     {
-      return (std::min) (lhs->get (idx), rhs->get (idx));
+      return (std::min) (lhs->get (idx, local_idx), rhs->get (idx, local_idx));
     }
   };
 
@@ -117,13 +119,14 @@ namespace arch {
     }
     /**
      * \brief  implements summation (lhs[idx], rhs[idx]) operation
-     * \param  idx value index
+     * \param  idx value index in slice
+     * \param  local_idx value index
      * \return sum of two values lhs[idx] and rhs[idx]
      */
     float16_t
-    get (size_t idx)
+    get (long long idx, long long local_idx)
     {
-      return lhs->get (idx) + rhs->get (idx);
+      return lhs->get (idx, local_idx) + rhs->get (idx, local_idx);
     }
   };
   /**
@@ -145,13 +148,14 @@ namespace arch {
     }
     /**
      * \brief  implements subtract (lhs[idx], rhs[idx]) operation
-     * \param  idx value index
+     * \param  idx value index in slice
+     * \param  local_idx value index
      * \return sub of two values lhs[idx] and rhs[idx]
      */
     float16_t
-    get (size_t idx)
+    get (long long idx, long long local_idx)
     {
-      return lhs->get (idx) - rhs->get (idx);
+      return lhs->get (idx, local_idx) - rhs->get (idx, local_idx);
     }
   };
   /**
@@ -173,13 +177,14 @@ namespace arch {
     }
     /**
      * \brief  implements multiplication (lhs[idx], rhs[idx]) operation
-     * \param  idx value index
+     * \param  idx value index in slice
+     * \param  local_idx value index
      * \return mul of two values lhs[idx] and rhs[idx]
      */
     float16_t
-    get (size_t idx)
+    get (long long idx, long long local_idx)
     {
-      return lhs->get (idx) * rhs->get (idx);
+      return lhs->get (idx, local_idx) * rhs->get (idx, local_idx);
     }
   };
   /**
@@ -201,13 +206,14 @@ namespace arch {
     }
     /**
      * \brief  implements division (lhs[idx], rhs[idx]) operation
-     * \param  idx value index
+     * \param  idx value index in slice
+     * \param  local_idx value index
      * \return div of two values lhs[idx] and rhs[idx]
      */
     float16_t
-    get (size_t idx)
+    get (long long idx, long long local_idx)
     {
-      return lhs->get (idx) / rhs->get (idx);
+      return lhs->get (idx, local_idx) / rhs->get (idx, local_idx);
     }
   };
 
