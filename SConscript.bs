@@ -45,7 +45,7 @@ if (build_kind == "debug") :
 elif (build_kind == "release") :
     env.AppendUnique (LIBS = libs + boost_libs)
 
-bs_arch = env.SharedLibrary (target = os.path.join (tar_exe_plugin_dir, lib_name), source = files (["."]).sources)
+bs_arch = env.SharedLibrary (target = os.path.join (tar_exe_plugin_dir, lib_name), source = files (["."], ["stdafx.cpp"]).sources)
 
 env.Alias (tar_name, bs_arch)
 Export ("bs_arch")

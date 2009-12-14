@@ -36,7 +36,7 @@ namespace blue_sky {
 
   BLUE_SKY_REGISTER_PLUGIN_FUN
   {
-    const plugin_descriptor &pd = *bs_init.pd_;
+    //const plugin_descriptor &pd = *bs_init.pd_;
 
     bool res = true;
     return res;
@@ -99,7 +99,6 @@ BLUE_SKY_INIT_PY_FUN
   export_unary <cos_op>   ("cos_op");
   export_unary <tan_op>   ("tan_op");
   export_unary <sqrt_op>  ("sqrt_op");
-  export_unary <abs_op>   ("abs_op");
   export_unary <abs_op>   ("abs_op");
   export_unary <log_op>   ("log_op");
   export_unary <log10_op> ("log10_op");
